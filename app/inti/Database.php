@@ -12,21 +12,18 @@ class pangkalan_data
 
 	private $dbh;
 	private $stmt;
+	private $result;
 
 	public function __construct()
 	{
-		$dsn = 'mysql:host='.$this->host.';dbname='.$this->pd;
+		$this->dbh = new mysqli();
+		
+		$this->dbh->connect($this->host, $this->user, $this->pass, $this->pd);
 
-		$opsi = array(
-			PDO::ATTR_PERSISTENT => true,
-			PDO::ATTR_ERRMODE    => PDO::ERRMODE_EXCEPTION
-		);
-
-		try {
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $opsi);
-		} catch(PDOException $e) {
-			die($e->getMessage());
+		if ($this->dbh->connect_error) {
+			echo "Koneksi Eror: " . $this->dbh->connect_errno . " - " . $this->dbh->connect_error;
 		}
+
 	}
 
 	public function kueri($kueri)
@@ -34,29 +31,33 @@ class pangkalan_data
 		$this->stmt = $this->dbh->prepare($kueri);
 	}
 
-	public function bind($param, $val, $tipe = null)
+	public function bungkus(...$val)
 	{
+		$tipe = null;
 		if ( is_null($tipe) ) {
-			switch (true) {
-				case is_int($val):
-					$tipe = PDO::PARAM_INT;
-					break;
+			for ($i=0; $i < count($val); $i++) { 
+				switch (true) {
+					case is_int($val):
+						$tipe[$i] = "i";
+						break;
 
-				case is_bool($val):
-					$tipe = PDO::PARAM_BOOL;
-					break;
+					case is_double($val):
+						$tipe[$i] = "d";
+						break;
 
-				case is_null($val):
-					$tipe = PDO::PARAM_NULL;
-					break;
-				
-				default:
-					$tipe = PDO::PARAM_STR;
-					break;
+					case is_bool($val):
+						$tipe[$i] = "b";
+						break;
+						
+					default:
+						$tipe[$i] = "s";
+						break;
+				}
 			}
 		}
-
-		$this->stmt->bindValue($param, $val, $tipe);
+		
+		$tipe = implode("", $tipe);
+		$this->stmt->bind_param($tipe, ...$val);
 	}
 
 	public function eksekusi()
@@ -64,24 +65,31 @@ class pangkalan_data
 		$this->stmt->execute();
 	}
 
-	// Fungsi-fungsi untuk menampilkan data
+	// Fungsi-fungsi untuk menampilkan baris data
 
-	public function hasil_set()
-	{
-		$this->eksekusi();
-		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-	}
+		public function hasil_jamak()
+		{
+			$this->eksekusi();
+			$this->result = $this->stmt->get_result();
+			return $this->result->fetch_all(MYSQLI_ASSOC);
+		}
 
-	public function single()
-	{
-		$this->eksekusi();
-		return $this->stmt->fetch(PDO::FETCH_ASSOC);
-	}
+		public function hasil_tunggal()
+		{
+			$this->eksekusi();
+			$this->result = $this->stmt->get_result();
+			return $this->result->fetch_assoc();
+		}
 
-	// Fungsi-fungsi untuk menulis data
+	// Fungsi-fungsi untuk menghitung perubahan baris data
 
-	public function rowCount()
-	{
-		return $this->stmt->rowCount();
-	}
+		public function baris_terefek()
+		{
+			if ( $this->stmt->affected_rows < 0 ) {
+				$hasil = $this->stmt->affected_rows + 1;
+			} else {
+				$hasil = $this->stmt->affected_rows;
+			}
+			return $hasil;
+		}
 } 
