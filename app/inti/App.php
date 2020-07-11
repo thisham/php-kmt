@@ -14,14 +14,14 @@ class App
 		$url = $this->singkatURL();
 		// var_dump($url);
 
-		if (file_exists('../app/kontroler/' . $url[0] . '.php')) {
+		if (file_exists(DIREKTORI . '/app/kontroler/' . $url[0] . '.php')) {
 			
 			// KONTROLER
 			$this->kontroler = $url[0];
 			unset($url[0]);
 		}
 
-		include_once '../app/kontroler/' . $this->kontroler . '.php';
+		include_once DIREKTORI . '/app/kontroler/' . $this->kontroler . '.php';
 		$this->kontroler = new $this->kontroler;
 
 		// METODE
@@ -52,5 +52,3 @@ class App
 		}
 	}
 }
-
-?> 
