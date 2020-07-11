@@ -5,10 +5,8 @@ Youtube Channel: Web Programming Unpas
 
 # Rincian Aplikasi
 
-  - Mesin basis-data -> PDO (App/inti/Database.php)
-  - Front-End Resource -> BS 4.1.2
-  - Dibangun dengan PHP versi 5.6
+  - Dibangun dengan PHP versi 7.3
 
 # Pengujian App
 
-Work on PHP v 5.6+
+Work on PHP v 7.3+
