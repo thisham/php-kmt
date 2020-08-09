@@ -3,7 +3,7 @@
 /**
  * 
  */
-class pangkalan_data
+class Database
 {
 	private $host = NAMA_NH;
 	private $user = NAMA_UN;
@@ -31,7 +31,7 @@ class pangkalan_data
 		$this->stmt = $this->dbh->prepare($kueri);
 	}
 
-	public function bungkus(...$val)
+	public function ikat(...$val)
 	{
 		$tipe = null;
 		if ( is_null($tipe) ) {
@@ -92,4 +92,9 @@ class pangkalan_data
 			}
 			return $hasil;
 		}
+
+	public function tutup()
+	{
+		$this->dbh->close();
+	}
 } 

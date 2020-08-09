@@ -69,3 +69,11 @@
 </head>
 <body>
 	<br>
+	<div class="wrap">
+		<h1>Aplikasi Terpasang!</h1>
+		<p>Anda dapat menemukan view ini di app/tampilan/beranda/index.php.</p>
+		<p>Anda dapat menemukan kontroler ini di app/kontroler/beranda.php.</p>
+	</div>
+
+</body>
+</html>

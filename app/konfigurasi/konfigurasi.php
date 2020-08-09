@@ -1,9 +1,10 @@
 <?php
 
-define('BASIS_URL', 'http://localhost:82/project/maintenance-app/publik');
+$basis_url 	= 'http://lab.ukri.ac.id/bahan1';
 
-// Pangkalan Data
-define('NAMA_PD', 'basis_data');
-define('NAMA_UN', 'root');
-define('NAMA_KS', '');
-define('NAMA_NH', 'localhost');
+$basis_data = array(
+	'database'	=> 'alims_bahan',
+	'username'	=> 'root',
+	'password'	=> '',
+	'hostname'	=> 'localhost'
+);

@@ -8,6 +8,7 @@ class Kontroler
 	
 	public function tampilkan($view, $data = [])
 	{
+		extract($data);
 		require_once DIREKTORI . '/app/tampilan/' . $view . '.php';
 	}
 
