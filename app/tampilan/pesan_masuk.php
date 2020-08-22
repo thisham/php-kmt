@@ -72,6 +72,7 @@
 	<div class="wrap">
 		<h1>Aplikasi Terpasang!</h1>
 		<p>PHP-KMT v2.4.0-alpha (Pra-Rotan)</p>
+		<a href="https://github.com/thisham/php-kmt">Github -> thisham/php-kmt</a> || <a href="https://kmt.thisham.my.id">Web -> kmt.thisham.my.id</a>
 	</div>
 
 </body>
