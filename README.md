@@ -3,10 +3,10 @@
 Pustaka: 
 Youtube Channel: Web Programming Unpas
 
-# Rincian Aplikasi
+## Spesifikasi
 
   - Dibangun dengan PHP versi 7.3
 
-# Pengujian App
+## Pengujian App
 
-Work on PHP v 7.3+
+Work on PHP v7.3
