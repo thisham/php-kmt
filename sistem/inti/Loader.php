@@ -2,7 +2,6 @@
 
 require_once DIREKTORI . '/app/konfigurasi/autoload.php';
 require_once DIREKTORI . '/app/konfigurasi/konstanta.php';
-require_once DIREKTORI . '/sistem/helper/url_helper.php';
 
 
 for ($i = 0; $i < count($pustaka); $i++) {
