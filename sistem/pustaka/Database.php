@@ -14,7 +14,7 @@ class Database
 	private $stmt;
 	private $result;
 
-	public function __construct()
+	public function __construct($stmt = '')
 	{
 		$this->dbh = new mysqli();
 		
@@ -24,11 +24,14 @@ class Database
 			echo "Koneksi Eror: " . $this->dbh->connect_errno . " - " . $this->dbh->connect_error;
 		}
 
+		$this->stmt = $stmt;
+
 	}
 
 	public function kueri($kueri)
 	{
 		$this->stmt = $this->dbh->prepare($kueri);
+		return $this;
 	}
 
 	public function ikat(...$val)
@@ -58,11 +61,13 @@ class Database
 		
 		$tipe = implode("", $tipe);
 		$this->stmt->bind_param($tipe, ...$val);
+		return $this;
 	}
 
 	public function eksekusi()
 	{
 		$this->stmt->execute();
+		return $this;
 	}
 
 	// Fungsi-fungsi untuk menampilkan baris data
@@ -97,4 +102,4 @@ class Database
 	{
 		$this->dbh->close();
 	}
-} 
+}
