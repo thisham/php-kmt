@@ -10,6 +10,8 @@ $pustaka 	= array('session', 'database');
 
 /**
  * Bagian ini untuk memuat secara otomatis helper.
+ *  1. URL [sistem: url], untuk memuat fungsi basis_url() [important to load!!];
+ *  2. Email [sistem: email], untuk memuat fungsi-fungsi email.
  */
 
 $helper		= array('url');
